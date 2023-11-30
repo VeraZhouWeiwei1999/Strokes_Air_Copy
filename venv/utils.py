@@ -1,7 +1,9 @@
 import pandas as pd
 import utils
 from settings import Settings
+
 pd.options.display.max_columns = None
+
 
 def upload_data(folder, file, columns, key):
     df = utils.upload_csv(folder, file)
@@ -9,6 +11,7 @@ def upload_data(folder, file, columns, key):
     df = utils.select_columns(df, columns)
     df = utils.drop_na(df, key)
     return df
+
 
 def upload_csv(directory, file_name):
     print(f"uploading {file_name}")
@@ -51,3 +54,7 @@ def save_data(df_name, directory, file_name):
     print(f"The data saved to {directory}")
     return
 
+
+def select_values(df, column_name, value):
+    df = df.loc[df[column_name] == "per 100,000"]
+    return df

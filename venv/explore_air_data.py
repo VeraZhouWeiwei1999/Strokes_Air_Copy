@@ -21,22 +21,22 @@ class Columns(str, Enum):
 def select_dates(f, s, df):
     years = range(f, s, 1)
     df_dates = pd.DataFrame(
-        columns=[Columns_air.DATE, Columns_air.AQI, Columns_air.CATEGORY, Columns_air.DEF_PARAMETER, \
-                Columns_air.CITY, Columns_air.STATE])
+        columns=[Columns.DATE, Columns.AQI, Columns.CATEGORY, Columns.DEF_PARAMETER, \
+                Columns.CITY, Columns.STATE])
     for year in years:
         start_date = f'{year}-01-01'
         end_date = f'{year}-12-31'
         mask = (df['Date'] > start_date) & (df['Date'] <= end_date)
         df_selected = df.loc[mask]
         df_dates = pd.concat([df_dates, df_selected], ignore_index=True)
-    df_dates[Columns_air.DATE] = df_dates[Columns_air.DATE].astype('datetime64[ns]')
-    df_dates[Columns_air.YEAR] = df_dates[Columns_air.DATE].dt.year
-    df_dates[Columns_air.MONTH] = df_dates[Columns_air.DATE].dt.month
+    df_dates[Columns.DATE] = df_dates[Columns.DATE].astype('datetime64[ns]')
+    df_dates[Columns.YEAR] = df_dates[Columns.DATE].dt.year
+    df_dates[Columns.MONTH] = df_dates[Columns.DATE].dt.month
     return df_dates
 
 # write documentation to the function
 def explore_data(df, parameter):
-    mask = df.groupby([Columns_air.STATE, Columns_air.CITY, Columns_air.YEAR], axis = 0)[Columns_air.AQI]
+    mask = df.groupby([Columns.STATE, Columns.CITY, Columns.YEAR], axis = 0)[Columns.AQI]
     select_action = {
         "max": mask.max().to_frame(),
         "min": mask.min().to_frame(),

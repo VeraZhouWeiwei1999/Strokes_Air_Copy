@@ -1,0 +1,7 @@
+# created by virtualenv automatically
+Scripts/
+Lib/
+share/
+data for project/
+data_for_project/
+__pycache__/
