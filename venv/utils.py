@@ -5,17 +5,18 @@ from settings import Settings
 pd.options.display.max_columns = None
 
 
-def upload_data(folder, file, columns, key):
-    df = utils.upload_csv(folder, file)
+def upload_data(file, columns, key):
+    df = utils.upload_csv(file)
     df = utils.set_index(df)
     df = utils.select_columns(df, columns)
     df = utils.drop_na(df, key)
     return df
 
 
-def upload_csv(directory, file_name):
+def upload_csv(file):
+    # there are exceptions
     print(f"uploading {file_name}")
-    df_name = pd.read_csv(f"{Settings.base_path}{directory}/{file_name}.csv", header=None, low_memory=False)
+    df_name = pd.read_csv(file, header=None, low_memory=False)
     print(df_name.shape)
     return df_name
 
@@ -30,6 +31,7 @@ def set_index(df_name):
 
 # select data we need
 def select_columns(df_name, columns_list):
+    # add exception
     df_name = df_name[columns_list]
     print(f"The shape after selecting columns is {df_name.shape}")
     return df_name

@@ -13,14 +13,13 @@ class Columns(str, Enum):
 
 
 # group by year and location
-def explore_strokes(df):
+def explore_strokes(df, parameter):
     mask = df.groupby([Columns.YEAR, Columns.STATE, Columns.CITY])[Columns.NUMBER_OF_CASES]
-    df = mask.max()
-    # select_action = {
-    #     "max": mask.max().to_frame(),
-    #     "min": mask.min().to_frame(),
-    #     "mean": mask.mean().to_frame(),
-    # }
-    # df = select_action.get(parameter, "unknown")
+    select_action = {
+        "max": mask.max().to_frame(),
+        "min": mask.min().to_frame(),
+        "mean": mask.mean().to_frame(),
+    }
+    df = select_action.get(parameter, "unknown")
     df = df.reset_index()
     return df
