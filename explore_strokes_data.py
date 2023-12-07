@@ -14,6 +14,8 @@ class Columns(str, Enum):
 
 # group by year and location
 def explore_strokes(df, parameter):
+    df[Columns.NUMBER_OF_CASES] = pd.to_numeric(df[Columns.NUMBER_OF_CASES], errors='coerce')
+    print(df[Columns.NUMBER_OF_CASES].dtype)
     mask = df.groupby([Columns.YEAR, Columns.STATE, Columns.CITY])[Columns.NUMBER_OF_CASES]
     select_action = {
         "max": mask.max().to_frame(),

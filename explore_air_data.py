@@ -36,6 +36,7 @@ def select_dates(f, s, df):
 
 # write documentation to the function
 def explore_data(df, parameter):
+    df[Columns.AQI] = pd.to_numeric(df[Columns.AQI], errors='coerce')
     mask = df.groupby([Columns.STATE, Columns.CITY, Columns.YEAR], axis = 0)[Columns.AQI]
     select_action = {
         "max": mask.max().to_frame(),
