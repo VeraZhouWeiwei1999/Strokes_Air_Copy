@@ -35,7 +35,7 @@ def process_data(file1, file2):
     df_air = explore_air_data.select_dates(first, second, df_air)
     df_air = utils.select_values(df_air, explore_air_data.Columns.DEF_PARAMETER, "PM2.5")
     # calculate mean
-    air_mean_year = explore_air_data.explore_data(df_air, "max")
+    air_mean_year = explore_air_data.explore_data(df_air, "mean")
     print(air_mean_year)
 
     return(strokes_mean_year, air_mean_year)

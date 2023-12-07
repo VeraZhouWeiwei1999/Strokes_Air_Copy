@@ -1,8 +1,5 @@
 from enum import Enum
-import utils
 import pandas as pd
-from settings import Settings
-import matplotlib.pyplot as plt
 pd.options.display.max_columns = None
 
 from enum import Enum
